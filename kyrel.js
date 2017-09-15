@@ -19,7 +19,7 @@ var row, colors, kyrel, return_value, rando;
     'g' => green
 */
 
-var initial_state = [ '.', '.', '.', '.', '.' ];
+var initial_state = ['g', 'b', 'b', '.', '.'];
 
 function main(n) {
 
@@ -29,7 +29,17 @@ function main(n) {
   ////                          ////
   //////////////////////////////////
 
-
+  x = initial_state.length;
+  // move forwar > if on color{ move back and erase, move forward}
+  for (var i=0; i < x; i++){
+    moveRight()
+    if (onBlue() || onGreen()){
+      moveLeft();
+      erase();
+      moveRight();
+    }
+  }
+  
 
   //////////////////////////////////
   ////                          ////

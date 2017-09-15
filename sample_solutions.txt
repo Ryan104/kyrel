@@ -1,25 +1,243 @@
 THIS IS A SAMPLE SOLUTION, PLEASE USE THIS FORMAT FOR YOUR SUBMISSIONS.
 
-1. Write a program which draws a green circle in the top-right corner of the grid.
+1. turn_3rd_cell_blue - [solution](/challenges/solutions/turn_3rd_cell_blue.js)
+
+  * start:  ['.', '.', '.', '.', '.']
+  * finish: ['.', '.', 'b', '.', '.']
+
 
   function main() {
     moveRight();
     moveRight();
-    moveRight();
-    moveRight();
-    useGreen();
+    useBlue();
     draw();
+
   }
 
-2. Write a program which draws X blue circles across the top row, where X is a variable you declare.
+  2. erase_3rd_cell - [solution](/challenges/solutions/erase_3rd_cell.js)
 
-  var x;
+    * start:  ['b', 'b', 'b', 'b', 'b']
+    * finish: ['b', 'b', '.', 'b', 'b']
 
   function main() {
-    x = 3;
+    x = 2;
+    for (var i=0; i < x; i++){
+      moveRight();
+    }
+    erase();
+  }
+
+  3. every_other_erase - [solution](/challenges/solutions/every_other_erase.js)
+
+  * start:  ['b', 'b', 'b', 'b', 'b']
+  * finish: ['b', '.', 'b', '.', 'b']
+
+    function main() {
+      x = initial_state.length;
+      for (var i=0; i < x; i++){
+        if (i % 2){
+          erase();
+        }
+        moveRight();
+      }
+    }
+
+  4. every_other_blue - [solution](/challenges/solutions/every_other_blue.js)
+
+    * start:  ['g', 'g', 'g', '.', '.']
+    * finish: ['g', 'b', 'g', 'b', '.']
+
+    function main() {
+      x = initial_state.length;
+      useBlue();
+      for (var i=0; i < x; i++){
+        if (i % 2){
+          draw();
+        }
+        moveRight();
+      }
+    }
+
+  5. move_start_to_finish - [solution](/challenges/solutions/move_start_to_finish.js)
+
+    * start:  ['b', '.', '.', '.', '.']
+    * finish: ['.', '.', '.', '.', 'b']
+
+    * start:  ['g', '.', '.', '.', '.']
+    * finish: ['.', '.', '.', '.', 'g']
+
+    * start:  ['.', '.', '.', '.', '.']
+    * finish: ['.', '.', '.', '.', '.']
+
+
+    function main() {
+      x = initial_state.length;
+
+      if (onBlue()) {
+        useBlue();
+      } else if (onGreen()){
+        useGreen();
+      } else {
+        return;
+      }
+
+      erase();
+
+      for (var i=0; i < x; i++){
+        moveRight();
+      }
+
+      draw();
+    }
+
+DAY 2 -----
+
+  
+1. all_blue - [solution](/challenges/solutions/all_blue.js)
+
+  * start:  ['.', '.', '.', '.', '.']
+  * finish: ['b', 'b', 'b', 'b', 'b']
+
+    x = initial_state.length;
+
+  function main(n) {
     useBlue();
-    for(var i = 0; i < x; i++) {
+    for (var i=0; i < x; i++){
       draw();
       moveRight();
     }
   }
+
+2. all_first_color - [solution](/challenges/solutions/all_first_color.js)
+
+  * start:  ['b', '.', '.', '.', '.']
+  * finish: ['b', 'b', 'b', 'b', 'b']
+
+  * start:  ['g', '.', '.', '.', '.']
+  * finish: ['g', 'g', 'g', 'g', 'g']
+
+  function main(n) {
+    x = initial_state.length;
+
+    if (onBlue()){
+      useBlue();
+    } else if (onGreen()){
+      useGreen();
+    }
+    for (var i=0; i < x; i++){
+      draw();
+      moveRight();
+    }
+  }
+
+  3. n_in_a_row - [solution](/challenges/solutions/n_in_a_row.js)
+
+    * start:  ['.', '.', '.', '.', '.']
+    * finish: ['b', 'b', '.', '.', '.']  \(given n is 2)
+    * finish: ['b', 'b', 'b', '.', '.']  \(given n is 3)
+
+      function main(n) {
+        n = 3;
+
+        if (n){
+          for (var i=0; i < n; i++){
+            draw();
+            moveRight();
+          }
+        }
+      }
+
+  4. every_even_erase - [solution](/challenges/solutions/every_even_erase.js)
+
+    * start:  ['b', 'b', 'b', 'b', 'b']
+    * finish: ['.', 'b', '.', 'b', '.']
+
+    function main(n) {
+      x = initial_state.length;
+      for (var i=0; i < x; i++){
+        if (i % 2 === 0){
+          erase();
+        }
+        moveRight();
+      }
+    }
+
+  5. every_odd_erase - [solution](/challenges/solutions/every_odd_erase.js)
+
+    * start:  ['b', 'b', 'b', 'b', 'b']
+    * finish: ['b', '.', 'b', '.', 'b']
+
+    function main(n) {
+      x = initial_state.length;
+      for (var i=0; i < x; i++){
+        if (i % 2 === 1){
+          erase();
+        }
+        moveRight();
+      }
+    }
+
+  6. every_n_erase - [solution](/challenges/solutions/every_n_erase.js)
+
+    * start:  ['b', 'b', 'b', 'b', 'b']
+    * finish: ['.', '.', '.', '.', '.'] // (given n is 1)
+    * finish: ['b', '.', 'b', '.', 'b'] // (given n is 2)
+    * finish: ['b', 'b', 'b', 'b', '.'] // (given n is 5)
+
+    function main(n) {
+      x = initial_state.length;
+      n = 5;
+      for (var i=0; i < x; i++){
+        if ((i + 1) % n === 0){
+          erase();
+        }
+        moveRight();
+      }
+    }
+
+  7. move_the_blue_dot_one_to_the_right - [solution](/challenges/solutions/move_the_blue_dot_one_to_the_right.js)
+
+    * start:  ['.', '.', 'b', '.', '.']
+    * finish: ['.', '.', '.', 'b', '.']
+    
+    * start:  ['g', 'b', '.', '.', 'g']
+    * finish: ['g', '.', 'b', '.', 'g']
+
+    function main(n) {
+      x = initial_state.length;
+      useBlue();
+      for (var i=0; i < x; i++){
+        if (onBlue()){
+          erase();
+          i++;
+          moveRight();
+          draw();
+        }
+        moveRight();
+      }
+    }
+
+
+  8. delete_before - [solution](/challenges/solutions/delete_before.js)
+
+    * start:  [ 'g', 'b', '.', '.', '.' ]
+    * finish: [ '.', 'b', '.', '.', '.' ]
+
+    * start:  [ 'g', 'b', 'b', '.', '.' ]
+    * finish: [ '.', '.', 'b', '.', '.' ]
+
+    function main(n) {
+      x = initial_state.length;
+      // move forwar > if on color{ move back and erase, move forward}
+      for (var i=0; i < x; i++){
+        moveRight()
+        if (onBlue() || onGreen()){
+          moveLeft();
+          erase();
+          moveRight();
+        }
+      }
+    }
+
+
+
